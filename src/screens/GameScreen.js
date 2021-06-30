@@ -56,27 +56,38 @@ const Block = props => {
   );
 };
 
+// const candidate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
 const GameScreen = () => {
+  const candidate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   const _CreateBlockRow = () => {
     const elements = [];
     for (let i = 0; i < 4; i++) {
       elements.push(
         <View style={{flexDirection: 'row'}}>
-          <_CreateBlocks num={4} />
+          <_CreateBlocks num={4} line={i} />
         </View>,
       );
     }
-    return <View style={{flexDirection: 'column'}}>{elements}</View>;
+    return (
+      <View style={{flexDirection: 'column', alignItems: 'center'}}>
+        {elements}
+      </View>
+    );
   };
 
-  const _CreateBlocks = ({num}) => {
+  const _CreateBlocks = ({num, line}) => {
     const elements = [];
-    const candidate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
     for (let i = 0; i < num; i++) {
       elements.push(
         <Block
           idx={i}
-          title={candidate.splice(Math.floor(Math.random() * (16 - i)), 1)[0]}
+          title={
+            candidate.splice(
+              Math.floor(Math.random() * (16 - 4 * line - i)),
+              1,
+            )[0]
+          }
         />,
       );
     }

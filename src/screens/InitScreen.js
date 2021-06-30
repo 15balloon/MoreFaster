@@ -41,16 +41,6 @@ const Section = ({children, title}) => {
 };
 
 const InitScreen = props => {
-  const GameInit = () => {
-    // Alert.alert('Game Start!');
-    // Navigation.push('morefaster.GameScreen');
-    Navigation.push(props.componentId, {
-      component: {
-        name: 'morefaster.GameScreen',
-      },
-    });
-  };
-
   const GameRank = () => {
     //   Alert.alert('Game Rank!');
   };
