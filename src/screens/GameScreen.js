@@ -102,7 +102,7 @@ const GameScreen = () => {
     <View>
       {checkStart ? (
         <View style={{marginTop: 150, alignItems: 'center'}}>
-          <Timer ss={15} done="Finish!" flag={flag} />
+          <Timer ss={15} done="실패!" flag={flag} />
           <CustomButton blocks={blocks} onPress={onPress} />
         </View>
       ) : (
