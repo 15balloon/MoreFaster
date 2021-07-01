@@ -1,4 +1,3 @@
-import {name as appName} from './app.json';
 import {Navigation} from 'react-native-navigation';
 
 import {registerScreens} from './src/screens';
@@ -15,6 +14,12 @@ Navigation.setRoot({
         {
           component: {
             name: 'morefaster.InitScreen',
+            options: {
+              topBar: {
+                visible: false,
+                animate: false,
+              },
+            },
           },
         },
       ],

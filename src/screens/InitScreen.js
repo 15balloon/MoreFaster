@@ -42,7 +42,7 @@ const Section = ({children, title}) => {
 
 const InitScreen = props => {
   const GameRank = () => {
-    //   Alert.alert('Game Rank!');
+    Alert.alert('Game Rank!', 'Coming Soon...');
   };
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -58,8 +58,7 @@ const InitScreen = props => {
         style={{
           backgroundColor: isDarkMode ? Colors.black : Colors.white,
         }}>
-        {/* <GameHomeScreen /> */}
-        <Section title="More Faster!"></Section>
+        <Section title="More Faster!">0 to 15</Section>
         <View
           style={{
             marginTop: 300,
@@ -68,16 +67,15 @@ const InitScreen = props => {
           }}>
           <Button
             color="green"
-            title="Game Start"
+            title="Play Game"
             onPress={() =>
               Navigation.push(props.componentId, {
                 component: {
                   name: 'morefaster.GameScreen',
                   options: {
                     topBar: {
-                      title: {
-                        text: 'Game',
-                      },
+                      visible: false,
+                      animate: false,
                     },
                   },
                 },
@@ -104,13 +102,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   sectionTitle: {
-    marginTop: 50,
+    marginTop: 80,
     fontSize: 36,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
   sectionDescription: {
     marginTop: 8,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '400',
   },
   highlight: {
