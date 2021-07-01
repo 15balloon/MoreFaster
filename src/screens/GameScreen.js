@@ -1,138 +1,122 @@
-import React, {Component} from 'react';
+import React, {useCallback, useState, useRef} from 'react';
 
-import {
-  Alert,
-  Button,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {Alert, Button, View} from 'react-native';
 
 import CustomButton from '../components/CustomButton';
-
-const Section = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const Block = props => {
-  return (
-    <View
-      style={{
-        width: 50,
-        height: 50,
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-      }}>
-      <CustomButton title={props.title} />
-    </View>
-  );
-};
-
-// const candidate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+import Timer from '../components/Timer';
 
 const GameScreen = () => {
-  const candidate = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-  const _CreateBlockRow = () => {
-    const elements = [];
-    for (let i = 0; i < 4; i++) {
-      elements.push(
-        <View style={{flexDirection: 'row'}}>
-          <_CreateBlocks num={4} line={i} />
-        </View>,
+  const [blocks, setBlocks] = useState([
+    {
+      id: 0,
+      checked: 1,
+    },
+    {
+      id: 1,
+      checked: 1,
+    },
+    {
+      id: 2,
+      checked: 1,
+    },
+    {
+      id: 3,
+      checked: 1,
+    },
+    {
+      id: 4,
+      checked: 1,
+    },
+    {
+      id: 5,
+      checked: 1,
+    },
+    {
+      id: 6,
+      checked: 1,
+    },
+    {
+      id: 7,
+      checked: 1,
+    },
+    {
+      id: 8,
+      checked: 1,
+    },
+    {
+      id: 9,
+      checked: 1,
+    },
+    {
+      id: 10,
+      checked: 1,
+    },
+    {
+      id: 11,
+      checked: 1,
+    },
+    {
+      id: 12,
+      checked: 1,
+    },
+    {
+      id: 13,
+      checked: 1,
+    },
+    {
+      id: 14,
+      checked: 1,
+    },
+    {
+      id: 15,
+      checked: 1,
+    },
+  ]);
+
+  const [flag, setFlag] = useState(false);
+
+  const currentNum = useRef(0);
+
+  const [checkStart, setCheckStart] = useState(false);
+
+  const GameStart = () => {
+    setCheckStart(true);
+  };
+
+  const onPress = useCallback(id => {
+    console.log('Click: ' + id);
+    if (id === currentNum.current) {
+      setBlocks(
+        blocks.map(block => (block.id === id ? {...block, checked: 0} : block)),
       );
+      currentNum.current += 1;
+      console.log('current: ' + currentNum.current);
+      if (currentNum.current === 16) {
+        setFlag(true);
+        Alert.alert('성공');
+      }
     }
-    return (
-      <View style={{flexDirection: 'column', alignItems: 'center'}}>
-        {elements}
-      </View>
-    );
-  };
-
-  const _CreateBlocks = ({num, line}) => {
-    const elements = [];
-    for (let i = 0; i < num; i++) {
-      elements.push(
-        <Block
-          idx={i}
-          title={
-            candidate.splice(
-              Math.floor(Math.random() * (16 - 4 * line - i)),
-              1,
-            )[0]
-          }
-        />,
-      );
-    }
-    return elements;
-  };
-
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  });
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        <Section title="More Faster!"></Section>
-        <_CreateBlockRow />
-      </View>
-    </SafeAreaView>
+    <View>
+      {checkStart ? (
+        <View style={{marginTop: 150, alignItems: 'center'}}>
+          <Timer ss={15} done="Finish!" flag={flag} />
+          <CustomButton blocks={blocks} onPress={onPress} />
+        </View>
+      ) : (
+        <View
+          style={{
+            marginTop: 320,
+            marginLeft: 30,
+            marginRight: 30,
+          }}>
+          <Button color="green" title="Start" onPress={GameStart} />
+        </View>
+      )}
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    marginTop: 50,
-    fontSize: 36,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default GameScreen;
