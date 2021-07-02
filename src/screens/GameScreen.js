@@ -93,7 +93,6 @@ const GameScreen = () => {
       console.log('current: ' + currentNum.current);
       if (currentNum.current === 16) {
         setFlag(true);
-        Alert.alert('성공');
       }
     }
   });
