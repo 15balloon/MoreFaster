@@ -35,8 +35,8 @@ React-Native를 사용한 숫자 블록 누르기 게임 프로젝트
 <img src="https://user-images.githubusercontent.com/81695614/124210257-12779880-db26-11eb-9526-b990fe185606.jpg" width="30%" height="30%"/>
 <img src="https://user-images.githubusercontent.com/81695614/124210266-13a8c580-db26-11eb-8772-1f448b5f4e26.jpg" width="30%" height="30%"/>
 </div>
-게임 화면으로 입장하면 가운데 START 버튼이 있다.   
-이를 누르면 게임이 시작되고 15초 타이머가 시작된다.   
+게임 화면으로 입장하면 가운데 START 버튼이 있다.  
+이를 누르면 게임이 시작되고 15초 타이머가 시작된다.  
 숫자를 0부터 순서대로 누르면 블록 내의 숫자가 사라진다.
 
 <div>
